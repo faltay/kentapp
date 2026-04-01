@@ -72,7 +72,10 @@
       "Bash(git add:*)",
       "Bash(git rm:*)",
       "Bash(git commit -m ':*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(cp -r public_html/public/* public_html/)",
+      "Bash(cp public_html/public/.htaccess public_html/)",
+      "Bash(rm -rf public_html/public)"
     ]
   }
 }
