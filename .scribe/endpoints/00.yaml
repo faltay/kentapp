@@ -1,0 +1,478 @@
+name: Menu
+description: |-
+
+  Endpoints for fetching public restaurant menus.
+  All endpoints require the restaurant to be active and not suspended.
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/menu/{slug}'
+    metadata:
+      custom: []
+      groupName: Menu
+      groupDescription: |-
+
+        Endpoints for fetching public restaurant menus.
+        All endpoints require the restaurant to be active and not suspended.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Full menu'
+      description: |-
+        Returns the restaurant info along with all active categories and their items.
+        Response is cached for 5 minutes per locale.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        custom: []
+        name: slug
+        description: "The restaurant's unique slug."
+        required: true
+        example: demo-restaurant
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      slug: demo-restaurant
+    queryParameters:
+      locale:
+        custom: []
+        name: locale
+        description: 'Locale for localised content (`en` or `tr`). Defaults to `en`.'
+        required: false
+        example: tr
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      locale: tr
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "restaurant": {
+                "name": "Demo Restaurant",
+                "slug": "demo-restaurant",
+                "description": "A great place to eat.",
+                "currency": "USD",
+                "logo": "https://example.com/logo.jpg",
+                "city": "Istanbul",
+                "country": "TR"
+              },
+              "categories": [
+                {
+                  "id": 1,
+                  "name": "Starters",
+                  "description": null,
+                  "slug": "starters",
+                  "image": null,
+                  "items": [
+                    {
+                      "id": 1,
+                      "name": "Bruschetta",
+                      "description": "Toasted bread with tomatoes.",
+                      "slug": "bruschetta",
+                      "price": 8.5,
+                      "compare_price": null,
+                      "discount_percent": 0,
+                      "has_discount": false,
+                      "image": "https://example.com/img.jpg",
+                      "gallery": [],
+                      "badges": {
+                        "featured": false,
+                        "vegetarian": true,
+                        "vegan": false,
+                        "spicy": false,
+                        "gluten_free": false
+                      },
+                      "preparation_time": 10,
+                      "calories": 220,
+                      "category_id": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "No query results for model [App\\Models\\Restaurant]."
+          }
+        headers: []
+        description: 'Restaurant not found or inactive'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/menu/{slug}/categories'
+    metadata:
+      custom: []
+      groupName: Menu
+      groupDescription: |-
+
+        Endpoints for fetching public restaurant menus.
+        All endpoints require the restaurant to be active and not suspended.
+      subgroup: ''
+      subgroupDescription: ''
+      title: Categories
+      description: |-
+        Returns only the active categories for a restaurant (without items).
+        Useful for building a category navigation before lazy-loading items.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        custom: []
+        name: slug
+        description: "The restaurant's unique slug."
+        required: true
+        example: demo-restaurant
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      slug: demo-restaurant
+    queryParameters:
+      locale:
+        custom: []
+        name: locale
+        description: 'Locale for localised content (`en` or `tr`).'
+        required: false
+        example: en
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      locale: en
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": [
+              {
+                "id": 1,
+                "name": "Starters",
+                "description": null,
+                "slug": "starters",
+                "image": null,
+                "items": []
+              }
+            ]
+          }
+        headers: []
+        description: Success
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/menu/{slug}/items'
+    metadata:
+      custom: []
+      groupName: Menu
+      groupDescription: |-
+
+        Endpoints for fetching public restaurant menus.
+        All endpoints require the restaurant to be active and not suspended.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Items list'
+      description: |-
+        Returns a paginated list of active menu items.
+        Supports filtering by category, full-text search, and featured flag.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        custom: []
+        name: slug
+        description: "The restaurant's unique slug."
+        required: true
+        example: demo-restaurant
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      slug: demo-restaurant
+    queryParameters:
+      category:
+        custom: []
+        name: category
+        description: 'Filter by category slug.'
+        required: false
+        example: starters
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      search:
+        custom: []
+        name: search
+        description: 'Search by item name.'
+        required: false
+        example: bruschetta
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      featured:
+        custom: []
+        name: featured
+        description: 'Return only featured items when `1`.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      per_page:
+        custom: []
+        name: per_page
+        description: 'Items per page (max 100, default 20).'
+        required: false
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      page:
+        custom: []
+        name: page
+        description: 'Page number.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      locale:
+        custom: []
+        name: locale
+        description: 'Locale for localised content.'
+        required: false
+        example: en
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      category: starters
+      search: bruschetta
+      featured: true
+      per_page: 10
+      page: 1
+      locale: en
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": [
+              {
+                "id": 1,
+                "name": "Bruschetta",
+                "description": "Toasted bread with tomatoes.",
+                "slug": "bruschetta",
+                "price": 8.5,
+                "compare_price": null,
+                "discount_percent": 0,
+                "has_discount": false,
+                "image": null,
+                "gallery": [],
+                "badges": {
+                  "featured": false,
+                  "vegetarian": true,
+                  "vegan": false,
+                  "spicy": false,
+                  "gluten_free": false
+                },
+                "preparation_time": 10,
+                "calories": 220,
+                "category_id": 1
+              }
+            ],
+            "meta": {
+              "current_page": 1,
+              "last_page": 3,
+              "per_page": 20,
+              "total": 48
+            }
+          }
+        headers: []
+        description: Success
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/menu/{slug}/items/{item}'
+    metadata:
+      custom: []
+      groupName: Menu
+      groupDescription: |-
+
+        Endpoints for fetching public restaurant menus.
+        All endpoints require the restaurant to be active and not suspended.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Single item'
+      description: |-
+        Returns the full details of a single menu item.
+        Each successful call increments the item's `view_count`.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        custom: []
+        name: slug
+        description: "The restaurant's unique slug."
+        required: true
+        example: demo-restaurant
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      item:
+        custom: []
+        name: item
+        description: "The menu item's slug."
+        required: true
+        example: bruschetta
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      slug: demo-restaurant
+      item: bruschetta
+    queryParameters:
+      locale:
+        custom: []
+        name: locale
+        description: 'Locale for localised content.'
+        required: false
+        example: en
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      locale: en
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "id": 1,
+              "name": "Bruschetta",
+              "description": "Toasted bread with fresh tomatoes and basil.",
+              "slug": "bruschetta",
+              "price": 8.5,
+              "compare_price": 10.0,
+              "discount_percent": 15,
+              "has_discount": true,
+              "image": "https://example.com/thumb.jpg",
+              "gallery": ["https://example.com/gallery1.jpg"],
+              "badges": {
+                "featured": true,
+                "vegetarian": true,
+                "vegan": false,
+                "spicy": false,
+                "gluten_free": false
+              },
+              "preparation_time": 10,
+              "calories": 220,
+              "category_id": 1
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "No query results for model [App\\Models\\MenuItem]."
+          }
+        headers: []
+        description: 'Item not found'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

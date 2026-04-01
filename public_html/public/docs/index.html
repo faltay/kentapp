@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>QR Menu — API Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var tryItOutBaseUrl = "http://qrmenu.test";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-5.7.0.js"></script>
+
+    <script src="../docs/js/theme-default-5.7.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image"/>
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                    <ul id="tocify-header-introduction" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="introduction">
+                    <a href="#introduction">Introduction</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authenticating-requests">
+                    <a href="#authenticating-requests">Authenticating requests</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-menu" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="menu">
+                    <a href="#menu">Menu</a>
+                </li>
+                                    <ul id="tocify-subheader-menu" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="menu-GETapi-v1-menu--slug-">
+                                <a href="#menu-GETapi-v1-menu--slug-">Full menu</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="menu-GETapi-v1-menu--slug--categories">
+                                <a href="#menu-GETapi-v1-menu--slug--categories">Categories</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="menu-GETapi-v1-menu--slug--items">
+                                <a href="#menu-GETapi-v1-menu--slug--items">Items list</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="menu-GETapi-v1-menu--slug--items--item-">
+                                <a href="#menu-GETapi-v1-menu--slug--items--item-">Single item</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+            </div>
+
+    <ul class="toc-footer" id="toc-footer">
+                    <li style="padding-bottom: 5px;"><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li style="padding-bottom: 5px;"><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+    </ul>
+
+    <ul class="toc-footer" id="last-updated">
+        <li>Last updated: February 22, 2026</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>Public menu API for QR Menu SaaS. Fetch restaurant menus, categories and items to build your own integrations.</p>
+<aside>
+    <strong>Base URL</strong>: <code>http://qrmenu.test</code>
+</aside>
+<p>Welcome to the <strong>QR Menu API</strong>. This API lets you programmatically access restaurant menus, categories and menu items.</p>
+<p><strong>Base URL:</strong> <code>/api/v1</code></p>
+<p><strong>Rate limit:</strong> 60 requests / minute per IP.</p>
+<p><strong>Locale:</strong> Pass <code>?locale=tr</code> or <code>Accept-Language: tr</code> header to get localised content (default: <code>en</code>).</p>
+<aside>All endpoints return JSON. Inactive or suspended restaurants return <code>404</code>.</aside>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="menu">Menu</h1>
+
+    <p>Endpoints for fetching public restaurant menus.
+All endpoints require the restaurant to be active and not suspended.</p>
+
+                                <h2 id="menu-GETapi-v1-menu--slug-">Full menu</h2>
+
+<p>
+</p>
+
+<p>Returns the restaurant info along with all active categories and their items.
+Response is cached for 5 minutes per locale.</p>
+
+<span id="example-requests-GETapi-v1-menu--slug-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://qrmenu.test/api/v1/menu/demo-restaurant?locale=tr" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://qrmenu.test/api/v1/menu/demo-restaurant"
+);
+
+const params = {
+    "locale": "tr",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-menu--slug-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;restaurant&quot;: {
+            &quot;name&quot;: &quot;Demo Restaurant&quot;,
+            &quot;slug&quot;: &quot;demo-restaurant&quot;,
+            &quot;description&quot;: &quot;A great place to eat.&quot;,
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;logo&quot;: &quot;https://example.com/logo.jpg&quot;,
+            &quot;city&quot;: &quot;Istanbul&quot;,
+            &quot;country&quot;: &quot;TR&quot;
+        },
+        &quot;categories&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Starters&quot;,
+                &quot;description&quot;: null,
+                &quot;slug&quot;: &quot;starters&quot;,
+                &quot;image&quot;: null,
+                &quot;items&quot;: [
+                    {
+                        &quot;id&quot;: 1,
+                        &quot;name&quot;: &quot;Bruschetta&quot;,
+                        &quot;description&quot;: &quot;Toasted bread with tomatoes.&quot;,
+                        &quot;slug&quot;: &quot;bruschetta&quot;,
+                        &quot;price&quot;: 8.5,
+                        &quot;compare_price&quot;: null,
+                        &quot;discount_percent&quot;: 0,
+                        &quot;has_discount&quot;: false,
+                        &quot;image&quot;: &quot;https://example.com/img.jpg&quot;,
+                        &quot;gallery&quot;: [],
+                        &quot;badges&quot;: {
+                            &quot;featured&quot;: false,
+                            &quot;vegetarian&quot;: true,
+                            &quot;vegan&quot;: false,
+                            &quot;spicy&quot;: false,
+                            &quot;gluten_free&quot;: false
+                        },
+                        &quot;preparation_time&quot;: 10,
+                        &quot;calories&quot;: 220,
+                        &quot;category_id&quot;: 1
+                    }
+                ]
+            }
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Restaurant not found or inactive):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Restaurant].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-menu--slug-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-menu--slug-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-menu--slug-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-menu--slug-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-menu--slug-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-menu--slug-" data-method="GET"
+      data-path="api/v1/menu/{slug}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-menu--slug-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-menu--slug-"
+                    onclick="tryItOut('GETapi-v1-menu--slug-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-menu--slug-"
+                    onclick="cancelTryOut('GETapi-v1-menu--slug-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-menu--slug-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/menu/{slug}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-menu--slug-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-menu--slug-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="GETapi-v1-menu--slug-"
+               value="demo-restaurant"
+               data-component="url">
+    <br>
+<p>The restaurant's unique slug. Example: <code>demo-restaurant</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>locale</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="locale"                data-endpoint="GETapi-v1-menu--slug-"
+               value="tr"
+               data-component="query">
+    <br>
+<p>Locale for localised content (<code>en</code> or <code>tr</code>). Defaults to <code>en</code>. Example: <code>tr</code></p>
+            </div>
+                </form>
+
+                    <h2 id="menu-GETapi-v1-menu--slug--categories">Categories</h2>
+
+<p>
+</p>
+
+<p>Returns only the active categories for a restaurant (without items).
+Useful for building a category navigation before lazy-loading items.</p>
+
+<span id="example-requests-GETapi-v1-menu--slug--categories">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://qrmenu.test/api/v1/menu/demo-restaurant/categories?locale=en" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://qrmenu.test/api/v1/menu/demo-restaurant/categories"
+);
+
+const params = {
+    "locale": "en",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-menu--slug--categories">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Starters&quot;,
+            &quot;description&quot;: null,
+            &quot;slug&quot;: &quot;starters&quot;,
+            &quot;image&quot;: null,
+            &quot;items&quot;: []
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-menu--slug--categories" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-menu--slug--categories"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-menu--slug--categories"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-menu--slug--categories" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-menu--slug--categories">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-menu--slug--categories" data-method="GET"
+      data-path="api/v1/menu/{slug}/categories"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-menu--slug--categories', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-menu--slug--categories"
+                    onclick="tryItOut('GETapi-v1-menu--slug--categories');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-menu--slug--categories"
+                    onclick="cancelTryOut('GETapi-v1-menu--slug--categories');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-menu--slug--categories"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/menu/{slug}/categories</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-menu--slug--categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-menu--slug--categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="GETapi-v1-menu--slug--categories"
+               value="demo-restaurant"
+               data-component="url">
+    <br>
+<p>The restaurant's unique slug. Example: <code>demo-restaurant</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>locale</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="locale"                data-endpoint="GETapi-v1-menu--slug--categories"
+               value="en"
+               data-component="query">
+    <br>
+<p>Locale for localised content (<code>en</code> or <code>tr</code>). Example: <code>en</code></p>
+            </div>
+                </form>
+
+                    <h2 id="menu-GETapi-v1-menu--slug--items">Items list</h2>
+
+<p>
+</p>
+
+<p>Returns a paginated list of active menu items.
+Supports filtering by category, full-text search, and featured flag.</p>
+
+<span id="example-requests-GETapi-v1-menu--slug--items">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://qrmenu.test/api/v1/menu/demo-restaurant/items?category=starters&amp;search=bruschetta&amp;featured=1&amp;per_page=10&amp;page=1&amp;locale=en" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://qrmenu.test/api/v1/menu/demo-restaurant/items"
+);
+
+const params = {
+    "category": "starters",
+    "search": "bruschetta",
+    "featured": "1",
+    "per_page": "10",
+    "page": "1",
+    "locale": "en",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-menu--slug--items">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Bruschetta&quot;,
+            &quot;description&quot;: &quot;Toasted bread with tomatoes.&quot;,
+            &quot;slug&quot;: &quot;bruschetta&quot;,
+            &quot;price&quot;: 8.5,
+            &quot;compare_price&quot;: null,
+            &quot;discount_percent&quot;: 0,
+            &quot;has_discount&quot;: false,
+            &quot;image&quot;: null,
+            &quot;gallery&quot;: [],
+            &quot;badges&quot;: {
+                &quot;featured&quot;: false,
+                &quot;vegetarian&quot;: true,
+                &quot;vegan&quot;: false,
+                &quot;spicy&quot;: false,
+                &quot;gluten_free&quot;: false
+            },
+            &quot;preparation_time&quot;: 10,
+            &quot;calories&quot;: 220,
+            &quot;category_id&quot;: 1
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;last_page&quot;: 3,
+        &quot;per_page&quot;: 20,
+        &quot;total&quot;: 48
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-menu--slug--items" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-menu--slug--items"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-menu--slug--items"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-menu--slug--items" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-menu--slug--items">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-menu--slug--items" data-method="GET"
+      data-path="api/v1/menu/{slug}/items"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-menu--slug--items', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-menu--slug--items"
+                    onclick="tryItOut('GETapi-v1-menu--slug--items');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-menu--slug--items"
+                    onclick="cancelTryOut('GETapi-v1-menu--slug--items');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-menu--slug--items"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/menu/{slug}/items</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-menu--slug--items"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-menu--slug--items"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="GETapi-v1-menu--slug--items"
+               value="demo-restaurant"
+               data-component="url">
+    <br>
+<p>The restaurant's unique slug. Example: <code>demo-restaurant</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="category"                data-endpoint="GETapi-v1-menu--slug--items"
+               value="starters"
+               data-component="query">
+    <br>
+<p>Filter by category slug. Example: <code>starters</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETapi-v1-menu--slug--items"
+               value="bruschetta"
+               data-component="query">
+    <br>
+<p>Search by item name. Example: <code>bruschetta</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>featured</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="GETapi-v1-menu--slug--items" style="display: none">
+            <input type="radio" name="featured"
+                   value="1"
+                   data-endpoint="GETapi-v1-menu--slug--items"
+                   data-component="query"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="GETapi-v1-menu--slug--items" style="display: none">
+            <input type="radio" name="featured"
+                   value="0"
+                   data-endpoint="GETapi-v1-menu--slug--items"
+                   data-component="query"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Return only featured items when <code>1</code>. Example: <code>true</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-v1-menu--slug--items"
+               value="10"
+               data-component="query">
+    <br>
+<p>Items per page (max 100, default 20). Example: <code>10</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="page"                data-endpoint="GETapi-v1-menu--slug--items"
+               value="1"
+               data-component="query">
+    <br>
+<p>Page number. Example: <code>1</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>locale</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="locale"                data-endpoint="GETapi-v1-menu--slug--items"
+               value="en"
+               data-component="query">
+    <br>
+<p>Locale for localised content. Example: <code>en</code></p>
+            </div>
+                </form>
+
+                    <h2 id="menu-GETapi-v1-menu--slug--items--item-">Single item</h2>
+
+<p>
+</p>
+
+<p>Returns the full details of a single menu item.
+Each successful call increments the item's <code>view_count</code>.</p>
+
+<span id="example-requests-GETapi-v1-menu--slug--items--item-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://qrmenu.test/api/v1/menu/demo-restaurant/items/bruschetta?locale=en" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://qrmenu.test/api/v1/menu/demo-restaurant/items/bruschetta"
+);
+
+const params = {
+    "locale": "en",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-menu--slug--items--item-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Bruschetta&quot;,
+        &quot;description&quot;: &quot;Toasted bread with fresh tomatoes and basil.&quot;,
+        &quot;slug&quot;: &quot;bruschetta&quot;,
+        &quot;price&quot;: 8.5,
+        &quot;compare_price&quot;: 10,
+        &quot;discount_percent&quot;: 15,
+        &quot;has_discount&quot;: true,
+        &quot;image&quot;: &quot;https://example.com/thumb.jpg&quot;,
+        &quot;gallery&quot;: [
+            &quot;https://example.com/gallery1.jpg&quot;
+        ],
+        &quot;badges&quot;: {
+            &quot;featured&quot;: true,
+            &quot;vegetarian&quot;: true,
+            &quot;vegan&quot;: false,
+            &quot;spicy&quot;: false,
+            &quot;gluten_free&quot;: false
+        },
+        &quot;preparation_time&quot;: 10,
+        &quot;calories&quot;: 220,
+        &quot;category_id&quot;: 1
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Item not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\MenuItem].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-menu--slug--items--item-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-menu--slug--items--item-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-menu--slug--items--item-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-menu--slug--items--item-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-menu--slug--items--item-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-menu--slug--items--item-" data-method="GET"
+      data-path="api/v1/menu/{slug}/items/{item}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-menu--slug--items--item-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-menu--slug--items--item-"
+                    onclick="tryItOut('GETapi-v1-menu--slug--items--item-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-menu--slug--items--item-"
+                    onclick="cancelTryOut('GETapi-v1-menu--slug--items--item-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-menu--slug--items--item-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/menu/{slug}/items/{item}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-menu--slug--items--item-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-menu--slug--items--item-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="GETapi-v1-menu--slug--items--item-"
+               value="demo-restaurant"
+               data-component="url">
+    <br>
+<p>The restaurant's unique slug. Example: <code>demo-restaurant</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>item</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="item"                data-endpoint="GETapi-v1-menu--slug--items--item-"
+               value="bruschetta"
+               data-component="url">
+    <br>
+<p>The menu item's slug. Example: <code>bruschetta</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>locale</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="locale"                data-endpoint="GETapi-v1-menu--slug--items--item-"
+               value="en"
+               data-component="query">
+    <br>
+<p>Locale for localised content. Example: <code>en</code></p>
+            </div>
+                </form>
+
+            
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>

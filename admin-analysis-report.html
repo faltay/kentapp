@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel Analiz Raporu — QR Menu SaaS</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --surface: #181b23;
+            --surface-2: #1e222d;
+            --border: #2a2f3e;
+            --text: #e2e4e9;
+            --text-muted: #8b8fa3;
+            --accent: #6c7ee1;
+            --accent-soft: rgba(108, 126, 225, 0.12);
+            --critical: #e5484d;
+            --critical-soft: rgba(229, 72, 77, 0.1);
+            --critical-border: rgba(229, 72, 77, 0.25);
+            --high: #e89740;
+            --high-soft: rgba(232, 151, 64, 0.1);
+            --high-border: rgba(232, 151, 64, 0.25);
+            --medium: #5eb0ef;
+            --medium-soft: rgba(94, 176, 239, 0.1);
+            --medium-border: rgba(94, 176, 239, 0.25);
+            --low: #63b38f;
+            --low-soft: rgba(99, 179, 143, 0.1);
+            --low-border: rgba(99, 179, 143, 0.25);
+            --success: #46a758;
+            --success-soft: rgba(70, 167, 88, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* Header */
+        .report-header {
+            text-align: center;
+            margin-bottom: 56px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .report-header .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .report-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .report-header .subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .report-header .date {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-card .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .stat-card .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        /* Issue cards */
+        .issue-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            border-left: 3px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .issue-card:hover {
+            border-color: var(--border);
+        }
+
+        .issue-card.critical {
+            border-left-color: var(--critical);
+            background: var(--critical-soft);
+            border-color: var(--critical-border);
+        }
+
+        .issue-card.high {
+            border-left-color: var(--high);
+            background: var(--high-soft);
+            border-color: var(--high-border);
+        }
+
+        .issue-card.medium {
+            border-left-color: var(--medium);
+            background: var(--medium-soft);
+            border-color: var(--medium-border);
+        }
+
+        .issue-card.low {
+            border-left-color: var(--low);
+            background: var(--low-soft);
+            border-color: var(--low-border);
+        }
+
+        .issue-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .issue-number {
+            font-size: 12px;
+            font-weight: 700;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .critical .issue-number { background: var(--critical); color: #fff; }
+        .high .issue-number { background: var(--high); color: #fff; }
+        .medium .issue-number { background: var(--medium); color: #fff; }
+        .low .issue-number { background: var(--low); color: #fff; }
+
+        .issue-title {
+            font-size: 15px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .priority-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            flex-shrink: 0;
+        }
+
+        .critical .priority-badge { background: var(--critical); color: #fff; }
+        .high .priority-badge { background: var(--high); color: #fff; }
+        .medium .priority-badge { background: var(--medium); color: #fff; }
+        .low .priority-badge { background: var(--low); color: #fff; }
+
+        .issue-body {
+            color: var(--text-muted);
+            font-size: 13.5px;
+            line-height: 1.7;
+            margin-left: 36px;
+        }
+
+        .issue-body strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .issue-body code {
+            background: rgba(255,255,255,0.06);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 12.5px;
+            color: var(--accent);
+        }
+
+        .code-block {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 12.5px;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .code-block .comment { color: #5c6370; }
+        .code-block .highlight { color: var(--success); }
+        .code-block .danger { color: var(--critical); }
+
+        /* Table */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+        }
+
+        thead th {
+            background: var(--surface-2);
+            text-align: left;
+            padding: 10px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        thead th:first-child { border-radius: 8px 0 0 0; }
+        thead th:last-child { border-radius: 0 8px 0 0; }
+
+        tbody td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+
+        .status-ok {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .status-missing {
+            color: var(--critical);
+            font-weight: 600;
+        }
+
+        .status-weak {
+            color: var(--high);
+            font-weight: 600;
+        }
+
+        /* Summary table */
+        .summary-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .summary-section .summary-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .summary-row:last-child { border-bottom: none; }
+
+        .summary-row .label { color: var(--text-muted); }
+
+        .count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 24px;
+            padding: 0 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .count-badge.red { background: var(--critical-soft); color: var(--critical); }
+        .count-badge.orange { background: var(--high-soft); color: var(--high); }
+        .count-badge.blue { background: var(--medium-soft); color: var(--medium); }
+        .count-badge.green { background: var(--success-soft); color: var(--success); }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .container { padding: 24px 16px 48px; }
+            .report-header h1 { font-size: 24px; }
+            .stats-bar { grid-template-columns: repeat(3, 1fr); }
+            .issue-body { margin-left: 0; margin-top: 8px; }
+            .issue-header { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="report-header">
+            <div class="badge">QR Menu SaaS</div>
+            <h1>Admin Panel Analiz Raporu</h1>
+            <p class="subtitle">Kod, route, view, service, policy ve sidebar analizi</p>
+            <p class="date">26 Şubat 2026</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Controller</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">38</div>
+                <div class="stat-label">Route</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Service</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">FormRequest</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">25+</div>
+                <div class="stat-label">View</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Policy</div>
+            </div>
+        </div>
+
+        <!-- CRITICAL -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="icon" style="background:var(--critical-soft);color:var(--critical);">!</span>
+                Kritik Sorunlar
+            </h2>
+
+            <div class="issue-card critical">
+                <div class="issue-header">
+                    <span class="issue-number">1</span>
+                    <span class="issue-title">$plan->price / $plan->currency &mdash; Kaldırılmış kolon erişimi</span>
+                    <span class="priority-badge">Kritik</span>
+                </div>
+                <div class="issue-body">
+                    <strong>Dosyalar:</strong> <code>admin/users/create.blade.php</code> ve <code>admin/users/edit.blade.php</code>
+                    <br><br>
+                    Çoklu para birimi güncellemesiyle <code>price</code>, <code>price_yearly</code> ve <code>currency</code> kolonları kaldırılıp <code>prices</code> JSON kolonu ile değiştirildi. Ancak kullanıcı oluşturma/düzenleme formlarında hala eski kolonlara erişiliyor.
+                    <br><br>
+                    <strong>Sonuç:</strong> Runtime hatası verir veya null döner. <code>$plan->getDisplayPrice()</code> veya benzeri metot kullanılmalı.
+                </div>
+            </div>
+
+            <div class="issue-card critical">
+                <div class="issue-header">
+                    <span class="issue-number">2</span>
+                    <span class="issue-title">StoreUserRequest &mdash; super_admin rolü atanabilir</span>
+                    <span class="priority-badge">Kritik</span>
+                </div>
+                <div class="issue-body">
+                    View'da <code>super_admin</code> filtreleniyor ama validation'da engellenmiyor. Crafted POST isteği ile <code>super_admin</code> rolü atanabilir.
+                    <div class="code-block">
+<span class="comment">// Mevcut (güvenlik açığı):</span>
+'role' => ['required', 'string', 'exists:roles,name'],
+
+<span class="comment">// Olması gereken:</span>
+<span class="highlight">'role' => ['required', 'string', 'exists:roles,name', Rule::notIn(['super_admin'])],</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="issue-card critical">
+                <div class="issue-header">
+                    <span class="issue-number">3</span>
+                    <span class="issue-title">UserService::createUser &mdash; Plaintext şifre loglanıyor</span>
+                    <span class="priority-badge">Kritik</span>
+                </div>
+                <div class="issue-body">
+                    Exception durumunda <code>Log::error('...', ['data' => $data])</code> ile ham şifre log dosyasına yazılıyor. <code>$data</code> array'i hash'lenmemiş parolayı içerebilir.
+                    <div class="code-block">
+<span class="comment">// Mevcut:</span>
+<span class="danger">Log::error('User creation failed', ['error' => $e->getMessage(), 'data' => $data]);</span>
+
+<span class="comment">// Olması gereken:</span>
+<span class="highlight">Log::error('User creation failed', [
+    'error' => $e->getMessage(),
+    'data'  => Arr::except($data, ['password', 'password_confirmation'])
+]);</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HIGH -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="icon" style="background:var(--high-soft);color:var(--high);">!</span>
+                Yüksek Öncelikli Sorunlar
+            </h2>
+
+            <div class="issue-card high">
+                <div class="issue-header">
+                    <span class="issue-number">4</span>
+                    <span class="issue-title">Languages Admin Modülü &mdash; Tamamen eksik</span>
+                    <span class="priority-badge">Yüksek</span>
+                </div>
+                <div class="issue-body">
+                    CLAUDE.md'de "dil yönetimi" super admin sorumluluğu olarak belirtilmiş. <code>Language</code> model ve seeder mevcut ama admin CRUD'ı yok.
+                    <br><br>
+                    <strong>Eksik olanlar:</strong>
+                    <ul style="margin-top:8px;padding-left:20px;">
+                        <li>LanguageController (yok)</li>
+                        <li>admin.languages.* route'ları (yok)</li>
+                        <li>admin/languages/ view dosyaları (yok)</li>
+                        <li>Sidebar'da languages linki (yok)</li>
+                        <li>admin.languages lang dosyası (yok)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="issue-card high">
+                <div class="issue-header">
+                    <span class="issue-number">5</span>
+                    <span class="issue-title">Settings Modülü &mdash; Ölü placeholder</span>
+                    <span class="priority-badge">Yüksek</span>
+                </div>
+                <div class="issue-body">
+                    Sidebar'da "Ayarlar/Settings" linki mevcut ama <code>href="#"</code> &mdash; ölü link. Controller, route ve view hiçbiri yok.
+                </div>
+            </div>
+
+            <div class="issue-card high">
+                <div class="issue-header">
+                    <span class="issue-number">6</span>
+                    <span class="issue-title">6 adet Policy sınıfı eksik</span>
+                    <span class="priority-badge">Yüksek</span>
+                </div>
+                <div class="issue-body">
+                    Aşağıdaki modellerin Policy sınıfı yok. Tüm FormRequest'leri <code>return true</code> döndürüyor. Sadece route middleware (<code>role:super_admin</code>) koruyor.
+                    <br><br>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Policy</th>
+                                    <th>FormRequest authorize()</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Post</td>
+                                    <td><span class="status-missing">YOK</span></td>
+                                    <td><span class="status-weak">return true</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Page</td>
+                                    <td><span class="status-missing">YOK</span></td>
+                                    <td><span class="status-weak">return true</span></td>
+                                </tr>
+                                <tr>
+                                    <td>BlogCategory</td>
+                                    <td><span class="status-missing">YOK</span></td>
+                                    <td><span class="status-weak">return true</span></td>
+                                </tr>
+                                <tr>
+                                    <td>SubscriptionPlan</td>
+                                    <td><span class="status-missing">YOK</span></td>
+                                    <td><span class="status-weak">return true</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Subscription</td>
+                                    <td><span class="status-missing">YOK</span></td>
+                                    <td><span class="status-weak">return true</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Payment</td>
+                                    <td><span class="status-missing">YOK</span></td>
+                                    <td><span class="status-weak">return true</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEDIUM -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="icon" style="background:var(--medium-soft);color:var(--medium);">~</span>
+                Orta Öncelikli Sorunlar
+            </h2>
+
+            <div class="issue-card medium">
+                <div class="issue-header">
+                    <span class="issue-number">7</span>
+                    <span class="issue-title">RestaurantPolicy &mdash; create() metodu eksik</span>
+                    <span class="priority-badge">Orta</span>
+                </div>
+                <div class="issue-body">
+                    <code>RestaurantPolicy</code>'de <code>viewAny</code>, <code>view</code>, <code>update</code>, <code>delete</code> var ama <code>create()</code> yok. <code>StoreRestaurantRequest::authorize()</code> &rarr; <code>return true</code>.
+                </div>
+            </div>
+
+            <div class="issue-card medium">
+                <div class="issue-header">
+                    <span class="issue-number">8</span>
+                    <span class="issue-title">RestaurantController::destroy &mdash; authorize() çağrısı yok</span>
+                    <span class="priority-badge">Orta</span>
+                </div>
+                <div class="issue-body">
+                    <code>RestaurantPolicy::delete()</code> mevcut ama controller'da hiç çağrılmıyor. Policy bypass ediliyor. Route middleware tek koruma katmanı.
+                </div>
+            </div>
+
+            <div class="issue-card medium">
+                <div class="issue-header">
+                    <span class="issue-number">9</span>
+                    <span class="issue-title">Dashboard &mdash; 28 hardcoded çeviri</span>
+                    <span class="priority-badge">Orta</span>
+                </div>
+                <div class="issue-body">
+                    <code>dashboard.blade.php</code> dosyasında 28 yerde <code>app()->getLocale() === 'tr' ? '...' : '...'</code> ternary kullanılıyor. <code>__()</code> ile lang dosyasından çekilmeli. 3. dil eklendiğinde kırılır.
+                </div>
+            </div>
+
+            <div class="issue-card medium">
+                <div class="issue-header">
+                    <span class="issue-number">10</span>
+                    <span class="issue-title">Sidebar section label'ları hardcoded</span>
+                    <span class="priority-badge">Orta</span>
+                </div>
+                <div class="issue-body">
+                    "İçerik/Content" ve "Sistem/System" etiketleri <code>__()</code> yerine inline ternary ile yazılmış. 3. dil eklenirse sadece Türkçe/İngilizce gösterir.
+                </div>
+            </div>
+
+            <div class="issue-card medium">
+                <div class="issue-header">
+                    <span class="issue-number">11</span>
+                    <span class="issue-title">Header "Super Admin" etiketi hardcoded</span>
+                    <span class="priority-badge">Orta</span>
+                </div>
+                <div class="issue-body">
+                    <code>admin-header.blade.php</code> satır 51'de "Super Admin" sabit İngilizce metin. <code>__('admin.users.roles.super_admin')</code> kullanılmalı.
+                </div>
+            </div>
+        </div>
+
+        <!-- LOW -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="icon" style="background:var(--low-soft);color:var(--low);">&darr;</span>
+                Düşük Öncelikli Sorunlar
+            </h2>
+
+            <div class="issue-card low">
+                <div class="issue-header">
+                    <span class="issue-number">12</span>
+                    <span class="issue-title">DashboardController &mdash; Controller extend ediyor</span>
+                    <span class="priority-badge">Düşük</span>
+                </div>
+                <div class="issue-body">
+                    Diğer tüm admin controller'lar <code>BaseController</code> extend ederken DashboardController plain <code>Controller</code> extend ediyor. Tutarsızlık.
+                </div>
+            </div>
+
+            <div class="issue-card low">
+                <div class="issue-header">
+                    <span class="issue-number">13</span>
+                    <span class="issue-title">DashboardController &mdash; try-catch yok</span>
+                    <span class="priority-badge">Düşük</span>
+                </div>
+                <div class="issue-body">
+                    DB sorguları exception handling olmadan çalışıyor. Database hatası durumunda unhandled 500 hatası verir.
+                </div>
+            </div>
+
+            <div class="issue-card low">
+                <div class="issue-header">
+                    <span class="issue-number">14</span>
+                    <span class="issue-title">ImpersonateController::start &mdash; Dead code</span>
+                    <span class="priority-badge">Düşük</span>
+                </div>
+                <div class="issue-body">
+                    Satır 41-43'te <code>$user->hasRole('super_admin')</code> kontrolü var ama aynı kontrol satır 24-26'da zaten return ediyor. Satır 41-43 ulaşılamaz (dead code).
+                </div>
+            </div>
+
+            <div class="issue-card low">
+                <div class="issue-header">
+                    <span class="issue-number">15</span>
+                    <span class="issue-title">togglePublish / toggleActive &mdash; try-catch yok</span>
+                    <span class="priority-badge">Düşük</span>
+                </div>
+                <div class="issue-body">
+                    <code>PostService::togglePublish()</code> ve <code>BlogCategoryService::toggleActive()</code> doğrudan <code>save()</code> yapıyor. Hata durumunda exception loglanmıyor.
+                </div>
+            </div>
+
+            <div class="issue-card low">
+                <div class="issue-header">
+                    <span class="issue-number">16</span>
+                    <span class="issue-title">BlogCategoryController::reorder &mdash; Inline validation</span>
+                    <span class="priority-badge">Düşük</span>
+                </div>
+                <div class="issue-body">
+                    FormRequest yerine controller'da <code>$request->validate()</code> kullanılıyor. CLAUDE.md'deki "FormRequest zorunlu" kuralına aykırı.
+                </div>
+            </div>
+
+            <div class="issue-card low">
+                <div class="issue-header">
+                    <span class="issue-number">17</span>
+                    <span class="issue-title">Orphaned dosya &mdash; posts/partials/form.blade.php</span>
+                    <span class="priority-badge">Düşük</span>
+                </div>
+                <div class="issue-body">
+                    <code>posts/partials/form.blade.php</code> hiçbir view'dan include edilmiyor. Eski flat <code>$post->slug</code> yapısını referans ediyor (artık JSON). Silinmeli.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-section">
+            <div class="summary-header">Sorun Özeti</div>
+            <div class="summary-row">
+                <span class="label">Kritik</span>
+                <span class="count-badge red">3</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Yüksek</span>
+                <span class="count-badge orange">3</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Orta</span>
+                <span class="count-badge blue">5</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Düşük</span>
+                <span class="count-badge green">6</span>
+            </div>
+            <div class="summary-row" style="border-top:1px solid var(--border);padding-top:14px;">
+                <span class="label" style="color:var(--text);font-weight:600;">Toplam</span>
+                <span style="font-weight:700;font-size:18px;">17</span>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

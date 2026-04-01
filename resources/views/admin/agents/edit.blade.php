@@ -1,0 +1,267 @@
+@extends('layouts.admin')
+
+@section('title', __('admin.agents.edit') . ': ' . $agent->name)
+
+@section('content')
+<div class="page-header mb-4">
+    <div class="row align-items-center">
+        <div class="col">
+            <div class="page-pretitle">{{ __('common.admin_panel') }}</div>
+            <h2 class="page-title">{{ __('admin.agents.edit') }}: {{ $agent->name }}</h2>
+        </div>
+        <div class="col-auto ms-auto">
+            <a href="{{ route('admin.agents.show', $agent) }}" class="btn btn-secondary">
+                <i class="ti ti-arrow-left icon"></i>
+                {{ __('common.back') }}
+            </a>
+        </div>
+    </div>
+</div>
+
+@php $profile = $agent->agentProfile; @endphp
+
+<form id="edit-agent-form" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <div class="row">
+
+        {{-- Sol Kolon --}}
+        <div class="col-lg-8">
+
+            {{-- Hesap Bilgileri --}}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="ti ti-user icon me-1 text-primary"></i>
+                        {{ __('admin.users.form.user_info') }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">{{ __('admin.users.form.name') }}</label>
+                            <input type="text" name="name" class="form-control" value="{{ $agent->name }}">
+                            <div class="invalid-feedback" data-field="name"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">{{ __('admin.users.form.email') }}</label>
+                            <input type="email" name="email" class="form-control" value="{{ $agent->email }}">
+                            <div class="invalid-feedback" data-field="email"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">{{ __('admin.users.form.phone') }}</label>
+                            <input type="text" name="phone" class="form-control" value="{{ $agent->phone }}" placeholder="+90 5xx xxx xx xx">
+                            <div class="invalid-feedback" data-field="phone"></div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-hint mb-1">{{ __('admin.users.form.password_hint') }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">{{ __('admin.users.form.password') }}</label>
+                            <input type="password" name="password" class="form-control">
+                            <div class="invalid-feedback" data-field="password"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">{{ __('auth.confirm_password') }}</label>
+                            <input type="password" name="password_confirmation" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Firma Bilgileri --}}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="ti ti-building-community icon me-1 text-primary"></i>
+                        {{ __('admin.agents.form.company_info') }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">{{ __('admin.agents.form.company_name') }}</label>
+                            <input type="text" name="company_name" class="form-control" value="{{ $profile?->company_name }}">
+                            <div class="invalid-feedback" data-field="company_name"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">{{ __('admin.agents.form.authorized_name') }}</label>
+                            <input type="text" name="authorized_name" class="form-control" value="{{ $profile?->authorized_name }}">
+                            <div class="invalid-feedback" data-field="authorized_name"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">{{ __('admin.agents.form.company_phone') }}</label>
+                            <input type="text" name="company_phone" class="form-control" value="{{ $profile?->company_phone }}">
+                            <div class="invalid-feedback" data-field="company_phone"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">{{ __('admin.agents.form.company_email') }}</label>
+                            <input type="email" name="company_email" class="form-control" value="{{ $profile?->company_email }}">
+                            <div class="invalid-feedback" data-field="company_email"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">{{ __('admin.agents.form.working_neighborhoods') }}</label>
+                            <select id="working-neighborhoods-select" name="working_neighborhoods[]" multiple
+                                    placeholder="{{ __('admin.agents.form.area_placeholder') }}">
+                                @foreach($profile?->working_neighborhoods ?? [] as $area)
+                                    <option value="{{ $area }}" selected>{{ $area }}</option>
+                                @endforeach
+                            </select>
+                            <div class="form-hint">{{ __('admin.agents.form.area_hint') }}</div>
+                            <div class="invalid-feedback" data-field="working_neighborhoods"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">{{ __('admin.agents.form.company_address') }}</label>
+                            <textarea name="company_address" class="form-control" rows="2">{{ $profile?->company_address }}</textarea>
+                            <div class="invalid-feedback" data-field="company_address"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Actions --}}
+            <div class="card">
+                <div class="card-body d-flex gap-2 justify-content-end">
+                    <button type="submit" id="submit-btn" class="btn btn-primary">
+                        <i class="ti ti-check icon me-1"></i>{{ __('common.save') }}
+                    </button>
+                    <a href="{{ route('admin.agents.show', $agent) }}" class="btn btn-secondary">
+                        <i class="ti ti-x icon me-1"></i>{{ __('common.cancel') }}
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        {{-- Sağ Kolon --}}
+        <div class="col-lg-4">
+
+            {{-- Belge Durumu --}}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="ti ti-certificate icon me-1 text-primary"></i>
+                        {{ __('admin.agents.form.certificate_status') }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <select name="certificate_status" class="form-select">
+                        @foreach(['none', 'pending', 'approved', 'rejected'] as $status)
+                        <option value="{{ $status }}" @selected($profile?->certificate_status === $status)>
+                            {{ __('admin.agents.certificate.' . $status) }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <div class="invalid-feedback" data-field="certificate_status"></div>
+                    @if($profile?->certificate_status === 'approved')
+                    <div class="mt-2">
+                        <label class="form-label">{{ __('admin.agents.form.certificate_number') }}</label>
+                        <input type="text" name="certificate_number" class="form-control" value="{{ $profile?->certificate_number }}">
+                        <div class="invalid-feedback" data-field="certificate_number"></div>
+                    </div>
+                    @endif
+                </div>
+            </div>
+
+            {{-- Yetki Belgesi --}}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="ti ti-file-certificate icon me-1 text-primary"></i>
+                        {{ __('admin.agents.form.certificate_file') }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    @include('admin.contractors.partials.certificate-dropzone', [
+                        'existingUrl'  => $profile?->getFirstMediaUrl('authority_certificate'),
+                        'existingName' => $profile?->getFirstMedia('authority_certificate')?->file_name,
+                    ])
+                </div>
+            </div>
+
+            {{-- Durum --}}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('common.status') }}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label class="form-check form-switch">
+                            <input type="checkbox" name="is_active" value="1" class="form-check-input" @checked($agent->is_active)>
+                            <span class="form-check-label">{{ __('admin.users.form.is_active') }}</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="form-check form-switch">
+                            <input type="checkbox" name="is_suspended" value="1" class="form-check-input" @checked($agent->is_suspended)>
+                            <span class="form-check-label text-danger">{{ __('admin.users.form.is_suspended') }}</span>
+                        </label>
+                        <div class="form-hint text-warning small">{{ __('admin.users.form.is_suspended_hint') }}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+@endsection
+
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
+@endpush
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+<script>
+new TomSelect('#working-neighborhoods-select', {
+    plugins: ['remove_button'],
+    valueField: 'value',
+    labelField: 'text',
+    searchField: 'text',
+    create: true,
+    createOnBlur: false,
+    maxOptions: 20,
+    maxItems: 5,
+    load: function(query, callback) {
+        if (!query.length) return callback();
+        fetch('{{ route('admin.locations.search') }}?q=' + encodeURIComponent(query))
+            .then(r => r.json())
+            .then(callback)
+            .catch(() => callback());
+    },
+    render: {
+        option_create: function(data) {
+            return '<div class="create">{{ __('admin.agents.form.area_add_custom') }}: <strong>' + data.input + '</strong></div>';
+        },
+        no_results: function() {
+            return '<div class="no-results">{{ __('admin.agents.form.area_no_results') }}</div>';
+        }
+    }
+});
+
+$('#edit-agent-form').on('submit', function (e) {
+    e.preventDefault();
+    var btn = $('#submit-btn');
+    btn.prop('disabled', true).html('<i class="ti ti-loader-2 icon me-1"></i>{{ __('common.saving') }}');
+
+    $('.is-invalid').removeClass('is-invalid');
+    $('.invalid-feedback').text('');
+
+    axios.post('{{ route('admin.agents.update', $agent) }}', new FormData(this))
+        .then(function (res) {
+            handleAjaxSuccess(res.data.message);
+            setTimeout(function () { window.location = res.data.data.redirect_url; }, 1500);
+        })
+        .catch(function (err) {
+            if (err.response?.status === 422 && err.response.data?.errors) {
+                Object.entries(err.response.data.errors).forEach(function ([field, messages]) {
+                    $('[name="' + field + '"]').addClass('is-invalid');
+                    $('[data-field="' + field + '"]').text(messages[0]);
+                });
+            }
+            handleAjaxError(err);
+            btn.prop('disabled', false).html('<i class="ti ti-check icon me-1"></i>{{ __('common.save') }}');
+        });
+});
+</script>
+@endpush

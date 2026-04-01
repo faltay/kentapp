@@ -1,0 +1,276 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/qrmenu.test"
+        }
+    ],
+    "info": {
+        "name": "QR Menu \u2014 API Documentation",
+        "_postman_id": "195aed78-dccb-4b60-b852-0a0e35d67213",
+        "description": "Public menu API for QR Menu SaaS. Fetch restaurant menus, categories and items to build your own integrations.",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Menu",
+            "description": "\nEndpoints for fetching public restaurant menus.\nAll endpoints require the restaurant to be active and not suspended.",
+            "item": [
+                {
+                    "name": "Full menu",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/menu\/:slug",
+                            "query": [
+                                {
+                                    "key": "locale",
+                                    "value": "tr",
+                                    "description": "Locale for localised content (`en` or `tr`). Defaults to `en`.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/menu\/:slug?locale=tr",
+                            "variable": [
+                                {
+                                    "id": "slug",
+                                    "key": "slug",
+                                    "value": "demo-restaurant",
+                                    "description": "The restaurant's unique slug."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns the restaurant info along with all active categories and their items.\nResponse is cached for 5 minutes per locale.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"data\": {\n    \"restaurant\": {\n      \"name\": \"Demo Restaurant\",\n      \"slug\": \"demo-restaurant\",\n      \"description\": \"A great place to eat.\",\n      \"currency\": \"USD\",\n      \"logo\": \"https:\/\/example.com\/logo.jpg\",\n      \"city\": \"Istanbul\",\n      \"country\": \"TR\"\n    },\n    \"categories\": [\n      {\n        \"id\": 1,\n        \"name\": \"Starters\",\n        \"description\": null,\n        \"slug\": \"starters\",\n        \"image\": null,\n        \"items\": [\n          {\n            \"id\": 1,\n            \"name\": \"Bruschetta\",\n            \"description\": \"Toasted bread with tomatoes.\",\n            \"slug\": \"bruschetta\",\n            \"price\": 8.5,\n            \"compare_price\": null,\n            \"discount_percent\": 0,\n            \"has_discount\": false,\n            \"image\": \"https:\/\/example.com\/img.jpg\",\n            \"gallery\": [],\n            \"badges\": {\n              \"featured\": false,\n              \"vegetarian\": true,\n              \"vegan\": false,\n              \"spicy\": false,\n              \"gluten_free\": false\n            },\n            \"preparation_time\": 10,\n            \"calories\": 220,\n            \"category_id\": 1\n          }\n        ]\n      }\n    ]\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"No query results for model [App\\\\Models\\\\Restaurant].\"\n}",
+                            "name": "Restaurant not found or inactive"
+                        }
+                    ]
+                },
+                {
+                    "name": "Categories",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/menu\/:slug\/categories",
+                            "query": [
+                                {
+                                    "key": "locale",
+                                    "value": "en",
+                                    "description": "Locale for localised content (`en` or `tr`).",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/menu\/:slug\/categories?locale=en",
+                            "variable": [
+                                {
+                                    "id": "slug",
+                                    "key": "slug",
+                                    "value": "demo-restaurant",
+                                    "description": "The restaurant's unique slug."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns only the active categories for a restaurant (without items).\nUseful for building a category navigation before lazy-loading items.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Starters\",\n      \"description\": null,\n      \"slug\": \"starters\",\n      \"image\": null,\n      \"items\": []\n    }\n  ]\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Items list",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/menu\/:slug\/items",
+                            "query": [
+                                {
+                                    "key": "category",
+                                    "value": "starters",
+                                    "description": "Filter by category slug.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "bruschetta",
+                                    "description": "Search by item name.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "featured",
+                                    "value": "1",
+                                    "description": "Return only featured items when `1`.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10",
+                                    "description": "Items per page (max 100, default 20).",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Page number.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "locale",
+                                    "value": "en",
+                                    "description": "Locale for localised content.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/menu\/:slug\/items?category=starters&search=bruschetta&featured=1&per_page=10&page=1&locale=en",
+                            "variable": [
+                                {
+                                    "id": "slug",
+                                    "key": "slug",
+                                    "value": "demo-restaurant",
+                                    "description": "The restaurant's unique slug."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns a paginated list of active menu items.\nSupports filtering by category, full-text search, and featured flag.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Bruschetta\",\n      \"description\": \"Toasted bread with tomatoes.\",\n      \"slug\": \"bruschetta\",\n      \"price\": 8.5,\n      \"compare_price\": null,\n      \"discount_percent\": 0,\n      \"has_discount\": false,\n      \"image\": null,\n      \"gallery\": [],\n      \"badges\": {\n        \"featured\": false,\n        \"vegetarian\": true,\n        \"vegan\": false,\n        \"spicy\": false,\n        \"gluten_free\": false\n      },\n      \"preparation_time\": 10,\n      \"calories\": 220,\n      \"category_id\": 1\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 1,\n    \"last_page\": 3,\n    \"per_page\": 20,\n    \"total\": 48\n  }\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Single item",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/menu\/:slug\/items\/:item",
+                            "query": [
+                                {
+                                    "key": "locale",
+                                    "value": "en",
+                                    "description": "Locale for localised content.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/menu\/:slug\/items\/:item?locale=en",
+                            "variable": [
+                                {
+                                    "id": "slug",
+                                    "key": "slug",
+                                    "value": "demo-restaurant",
+                                    "description": "The restaurant's unique slug."
+                                },
+                                {
+                                    "id": "item",
+                                    "key": "item",
+                                    "value": "bruschetta",
+                                    "description": "The menu item's slug."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns the full details of a single menu item.\nEach successful call increments the item's `view_count`.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Bruschetta\",\n    \"description\": \"Toasted bread with fresh tomatoes and basil.\",\n    \"slug\": \"bruschetta\",\n    \"price\": 8.5,\n    \"compare_price\": 10.0,\n    \"discount_percent\": 15,\n    \"has_discount\": true,\n    \"image\": \"https:\/\/example.com\/thumb.jpg\",\n    \"gallery\": [\"https:\/\/example.com\/gallery1.jpg\"],\n    \"badges\": {\n      \"featured\": true,\n      \"vegetarian\": true,\n      \"vegan\": false,\n      \"spicy\": false,\n      \"gluten_free\": false\n    },\n    \"preparation_time\": 10,\n    \"calories\": 220,\n    \"category_id\": 1\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"message\": \"No query results for model [App\\\\Models\\\\MenuItem].\"\n}",
+                            "name": "Item not found"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

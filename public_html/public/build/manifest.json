@@ -1,0 +1,75 @@
+{
+  "_index-C0Zqfgkc.js": {
+    "file": "assets/index-C0Zqfgkc.js",
+    "name": "index"
+  },
+  "_tom-select-D4XgCisP.css": {
+    "file": "assets/tom-select-D4XgCisP.css",
+    "src": "_tom-select-D4XgCisP.css"
+  },
+  "_tom-select.complete-6rqmgCtY.js": {
+    "file": "assets/tom-select.complete-6rqmgCtY.js",
+    "name": "tom-select.complete",
+    "css": [
+      "assets/tom-select-D4XgCisP.css"
+    ]
+  },
+  "resources/css/admin.css": {
+    "file": "assets/admin-CGzp5Fb_.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true,
+    "name": "restaurant",
+    "names": [
+      "admin.css",
+      "restaurant.css"
+    ]
+  },
+  "resources/css/menu.css": {
+    "file": "assets/menu-520panX-.css",
+    "src": "resources/css/menu.css",
+    "isEntry": true,
+    "name": "menu",
+    "names": [
+      "menu.css"
+    ]
+  },
+  "resources/css/restaurant.css": {
+    "file": "assets/admin-CGzp5Fb_.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true,
+    "name": "restaurant",
+    "names": [
+      "admin.css",
+      "restaurant.css"
+    ]
+  },
+  "resources/js/admin.js": {
+    "file": "assets/admin-BR24ICNv.js",
+    "name": "admin",
+    "src": "resources/js/admin.js",
+    "isEntry": true,
+    "imports": [
+      "_tom-select.complete-6rqmgCtY.js",
+      "_index-C0Zqfgkc.js"
+    ]
+  },
+  "resources/js/menu.js": {
+    "file": "assets/menu-Bnt4u581.js",
+    "name": "menu",
+    "src": "resources/js/menu.js",
+    "isEntry": true,
+    "imports": [
+      "_index-C0Zqfgkc.js"
+    ]
+  },
+  "resources/js/restaurant.js": {
+    "file": "assets/restaurant-CHgGBgjr.js",
+    "name": "restaurant",
+    "src": "resources/js/restaurant.js",
+    "isEntry": true,
+    "imports": [
+      "_tom-select.complete-6rqmgCtY.js",
+      "_index-C0Zqfgkc.js"
+    ]
+  }
+}

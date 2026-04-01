@@ -1,0 +1,691 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Using nullsafe property access "\?\-\>localized_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Controllers/Admin/PaymentController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>localized_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Admin/RestaurantController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Admin/RestaurantController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany\:\:active\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Public/MenuController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Http/Controllers/Restaurant/AIMenuController.php
+
+		-
+			message: '#^Parameter \#2 \$restaurant of job class App\\Jobs\\ParseMenuJob constructor expects App\\Models\\Restaurant in App\\Jobs\\ParseMenuJob\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/AIMenuController.php
+
+		-
+			message: '#^Parameter \#2 \$restaurant of job class App\\Jobs\\TranslateMenuJob constructor expects App\\Models\\Restaurant in App\\Jobs\\TranslateMenuJob\:\:dispatch\(\), Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/AIMenuController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$billing_cycle\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\IyzicoService\:\:createCheckoutForm\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\StripeService\:\:createCheckoutSession\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\SubscriptionService\:\:getActive\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\SubscriptionService\:\:subscribeFree\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Parameter \$restaurant of method App\\Services\\SubscriptionService\:\:activateFromStripe\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Parameter \$subscription of method App\\Services\\SubscriptionService\:\:recordPayment\(\) expects App\\Models\\Subscription, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/BillingController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Restaurant/BranchController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\Restaurant\\BranchService\:\:createBranch\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/BranchController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Restaurant/DashboardController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\SubscriptionService\:\:getActive\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Http/Controllers/Restaurant/MenuCategoryController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\Restaurant\\MenuCategoryService\:\:createCategory\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/MenuCategoryController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Http/Controllers/Restaurant/MenuItemController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\Restaurant\\MenuItemService\:\:createItem\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/MenuItemController.php
+
+		-
+			message: '#^Parameter \#1 \$view of function view expects view\-string\|null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/MenuItemController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>localized_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Restaurant/MenuItemController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Restaurant/QRCodeController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\Restaurant\\SettingsService\:\:updateSettings\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/SettingsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Http/Controllers/Restaurant/TableController.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\Restaurant\\TableService\:\:createTable\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Restaurant/TableController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>localized_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Restaurant/TableController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:hasActiveSubscription\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Middleware/CheckSubscription.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:branches\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Middleware/CheckUsageLimits.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getPlanLimit\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Middleware/CheckUsageLimits.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:menuItems\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Middleware/CheckUsageLimits.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:tables\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Middleware/CheckUsageLimits.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Middleware/RestaurantAccess.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuCategoryResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuCategoryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuCategoryResource\:\:\$image_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuCategoryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuCategoryResource\:\:\$localized_description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuCategoryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuCategoryResource\:\:\$localized_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuCategoryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuCategoryResource\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuCategoryResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$calories\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$compare_price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$discount_percent\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$image_url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$is_featured\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$is_gluten_free\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$is_spicy\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$is_vegan\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$is_vegetarian\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$localized_description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$localized_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$menu_category_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$preparation_time\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\MenuItemResource\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\MenuItemResource\:\:getMedia\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\MenuItemResource\:\:hasDiscount\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\RestaurantResource\:\:\$city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/RestaurantResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\RestaurantResource\:\:\$country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/RestaurantResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\RestaurantResource\:\:\$currency\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/RestaurantResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\RestaurantResource\:\:\$localized_description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/RestaurantResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\RestaurantResource\:\:\$localized_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/RestaurantResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\RestaurantResource\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/RestaurantResource.php
+
+		-
+			message: '#^Call to an undefined method App\\Http\\Resources\\RestaurantResource\:\:getFirstMediaUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/RestaurantResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Listeners/SendWelcomeEmail.php
+
+		-
+			message: '#^Parameter \#1 \$user of class App\\Mail\\WelcomeMail constructor expects App\\Models\\User, Illuminate\\Contracts\\Auth\\Authenticatable given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Listeners/SendWelcomeEmail.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Models/Branch.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: app/Models/Branch.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Models/MenuCategory.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Models/MenuCategory.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: app/Models/MenuCategory.php
+
+		-
+			message: '#^Call to an undefined method Spatie\\Image\\Drivers\\ImageDriver\:\:performOnCollections\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: app/Models/MenuItem.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Models/MenuItem.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Models/MenuItem.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: app/Models/MenuItem.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isFree\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Models/Restaurant.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany\:\:active\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Models/Restaurant.php
+
+		-
+			message: '#^Call to an undefined method Spatie\\Image\\Drivers\\ImageDriver\:\:performOnCollections\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: app/Models/Restaurant.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Models/Restaurant.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Models/Restaurant.php
+
+		-
+			message: '#^Method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:getLimit\(\) invoked with 1 parameter, 0 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: app/Models/Restaurant.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: app/Models/Restaurant.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Models/SubscriptionPlan.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Models/SubscriptionPlan.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: app/Models/SubscriptionPlan.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: app/Services/AI/MenuTranslatorService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/IyzicoService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/IyzicoService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Services/IyzicoService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>email" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/IyzicoService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Services/IyzicoService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: app/Services/IyzicoService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Restaurant/BranchService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_main\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Restaurant/BranchService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:branches\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/Restaurant/BranchService.php
+
+		-
+			message: '#^Method App\\Services\\Restaurant\\BranchService\:\:createBranch\(\) should return App\\Models\\Branch but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/Restaurant/BranchService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:addMedia\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/Restaurant/MenuCategoryService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:clearCache\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/Restaurant/MenuCategoryService.php
+
+		-
+			message: '#^Method App\\Services\\Restaurant\\MenuCategoryService\:\:createCategory\(\) should return App\\Models\\MenuCategory but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/Restaurant/MenuCategoryService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:addMedia\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Services/Restaurant/MenuItemService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:clearCache\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/Restaurant/MenuItemService.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Services/Restaurant/MenuItemService.php
+
+		-
+			message: '#^Method App\\Services\\Restaurant\\MenuItemService\:\:createItem\(\) should return App\\Models\\MenuItem but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/Restaurant/MenuItemService.php
+
+		-
+			message: '#^Ternary operator condition is always true\.$#'
+			identifier: ternary.alwaysTrue
+			count: 1
+			path: app/Services/Restaurant/MenuItemService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/Restaurant/QRCodeService.php
+
+		-
+			message: '#^Method App\\Services\\Restaurant\\TableService\:\:createTable\(\) should return App\\Models\\Table but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/Restaurant/TableService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/StripeService.php
+
+		-
+			message: '#^Parameter \#1 \$params of static method Stripe\\Checkout\\Session\:\:create\(\) expects array\{adaptive_pricing\?\: array\{enabled\?\: bool\}, after_expiration\?\: array\{recovery\?\: array\{allow_promotion_codes\?\: bool, enabled\: bool\}\}, allow_promotion_codes\?\: bool, automatic_tax\?\: array\{enabled\: bool, liability\?\: array\{account\?\: string, type\: string\}\}, billing_address_collection\?\: string, branding_settings\?\: array\{background_color\?\: string\|null, border_style\?\: string\|null, button_color\?\: string\|null, display_name\?\: string, font_family\?\: string\|null, icon\?\: array\{file\?\: string, type\: string, url\?\: string\}, logo\?\: array\{file\?\: string, type\: string, url\?\: string\}\}, cancel_url\?\: string, client_reference_id\?\: string, \.\.\.\}\|null, array\{mode\: ''payment'', payment_method_types\: array\{''card''\}, line_items\: array\{array\{price_data\: array\{currency\: string, unit_amount\: int, product_data\: array\{name\: non\-falsy\-string\}\}, quantity\: 1\}\}, metadata\: array\{restaurant_id\: int, plan_id\: int, billing_cycle\: string\}, success_url\: non\-falsy\-string, cancel_url\: string, customer_email\: mixed\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/StripeService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Services/SubscriptionService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany\:\:active\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/SubscriptionService.php
+
+		-
+			message: '#^Parameter \#1 \$restaurant of method App\\Services\\SubscriptionService\:\:sendSubscriptionCancelledMail\(\) expects App\\Models\\Restaurant, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/SubscriptionService.php
+
+		-
+			message: '#^Parameter \#3 \$plan of method App\\Services\\SubscriptionService\:\:sendSubscriptionCancelledMail\(\) expects App\\Models\\SubscriptionPlan, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/SubscriptionService.php

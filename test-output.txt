@@ -1,0 +1,125 @@
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\ExampleTest[39m
+  [32;1m✓[39;22m[90m [39m[90mthat true is true[39m[90m                                                                                           [39m [90m0.02s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\Models\MenuItemTest[39m
+  [32;1m✓[39;22m[90m [39m[90mlocalized name returns current locale[39m[90m                                                                       [39m [90m1.70s[39m  
+  [32;1m✓[39;22m[90m [39m[90mlocalized name falls back to english when locale missing[39m[90m                                                    [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mlocalized name returns empty when no names[39m[90m                                                                  [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mlocalized description returns empty when null[39m[90m                                                               [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mlocalized description falls back to english[39m[90m                                                                 [39m [90m0.25s[39m  
+  [32;1m✓[39;22m[90m [39m[90mhas discount returns true when compare price is higher[39m[90m                                                      [39m [90m0.16s[39m  
+  [32;1m✓[39;22m[90m [39m[90mhas discount returns false when no compare price[39m[90m                                                            [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90mhas discount returns false when compare price is lower[39m[90m                                                      [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdiscount percent calculates correctly[39m[90m                                                                       [39m [90m0.10s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdiscount percent returns zero when no discount[39m[90m                                                              [39m [90m0.11s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\Models\SubscriptionPlanTest[39m
+  [32;1m✓[39;22m[90m [39m[90mis free returns true when price is zero[39m[90m                                                                     [39m [90m0.10s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis free returns false when price is nonzero[39m[90m                                                                 [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mhas unlimited menu items returns true when minus one[39m[90m                                                        [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mhas unlimited menu items returns false for finite limit[39m[90m                                                     [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mhas unlimited branches returns true when minus one[39m[90m                                                          [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90mhas unlimited tables returns true when minus one[39m[90m                                                            [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mget limit returns correct values[39m[90m                                                                            [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mlocalized name returns correct locale[39m[90m                                                                       [39m [90m0.15s[39m  
+  [32;1m✓[39;22m[90m [39m[90mlocalized name falls back to english[39m[90m                                                                        [39m [90m0.13s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\Models\SubscriptionTest[39m
+  [32;1m✓[39;22m[90m [39m[90mis active returns true for active status with future end[39m[90m                                                    [39m [90m0.15s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis active returns true for active status with no end date[39m[90m                                                   [39m [90m0.14s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis active returns true for cancelled status with future end[39m[90m                                                 [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis active returns false when ends at is past[39m[90m                                                                [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis active returns false for expired status[39m[90m                                                                  [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis active returns false for past due status[39m[90m                                                                 [39m [90m0.15s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis expired is inverse of is active[39m[90m                                                                          [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis cancelled returns true for cancelled status[39m[90m                                                              [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mis cancelled returns false for active status[39m[90m                                                                [39m [90m0.10s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdays left returns max int when no end date[39m[90m                                                                  [39m [90m0.08s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdays left returns correct days[39m[90m                                                                              [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdays left returns zero when expired[39m[90m                                                                         [39m [90m0.09s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\Services\MenuItemServiceTest[39m
+  [32;1m✓[39;22m[90m [39m[90mcreate item persists to database[39m[90m                                                                            [39m [90m0.22s[39m  
+  [32;1m✓[39;22m[90m [39m[90mcreate item assigns correct restaurant[39m[90m                                                                      [39m [90m0.10s[39m  
+  [32;1m✓[39;22m[90m [39m[90mupdate item changes price and name[39m[90m                                                                          [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdelete item removes from database[39m[90m                                                                           [39m [90m0.14s[39m  
+  [32;1m✓[39;22m[90m [39m[90mduplicate item creates copy with copy suffix[39m[90m                                                                [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mduplicate item generates unique slug on collision[39m[90m                                                           [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mduplicate item increments sort order[39m[90m                                                                        [39m [90m0.12s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\Services\SubscriptionServiceTest[39m
+  [32;1m✓[39;22m[90m [39m[90msubscribe free creates active subscription[39m[90m                                                                  [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90msubscribe free records payment[39m[90m                                                                              [39m [90m0.09s[39m  
+  [32;1m✓[39;22m[90m [39m[90msubscribe free cancels existing active subscription[39m[90m                                                         [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90msubscribe free sets user active plan[39m[90m                                                                        [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mcancel sets status to cancelled[39m[90m                                                                             [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mcancel does not delete subscription[39m[90m                                                                         [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mcancelled subscription still reports active until period end[39m[90m                                                [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mget active returns subscription for restaurant[39m[90m                                                              [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90mget active returns null when no subscription[39m[90m                                                                [39m [90m0.11s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\Admin\DashboardTest[39m
+  [32;1m✓[39;22m[90m [39m[90madmin can access dashboard[39m[90m                                                                                  [39m [90m0.25s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdashboard passes required view data[39m[90m                                                                         [39m [90m0.15s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrestaurant owner cannot access admin dashboard[39m[90m                                                              [39m [90m0.16s[39m  
+  [32;1m✓[39;22m[90m [39m[90madmin can access users list[39m[90m                                                                                 [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90madmin can access restaurants list[39m[90m                                                                           [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90madmin can access payments list[39m[90m                                                                              [39m [90m0.11s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\Api\MenuApiTest[39m
+  [32;1m✓[39;22m[90m [39m[90mapi returns full menu for active restaurant[39m[90m                                                                 [39m [90m0.16s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi returns 404 for inactive restaurant[39m[90m                                                                     [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi returns 404 for suspended restaurant[39m[90m                                                                    [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi returns categories[39m[90m                                                                                      [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi returns items[39m[90m                                                                                           [39m [90m0.16s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi items can filter by category[39m[90m                                                                            [39m [90m0.15s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi items can search by name[39m[90m                                                                                [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi returns single item and increments view count[39m[90m                                                           [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi returns 404 for unknown item[39m[90m                                                                            [39m [90m0.14s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi respects locale query param[39m[90m                                                                             [39m [90m0.12s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\Auth\AuthTest[39m
+  [32;1m✓[39;22m[90m [39m[90mregister page is accessible[39m[90m                                                                                 [39m [90m0.14s[39m  
+  [32;1m✓[39;22m[90m [39m[90muser can register[39m[90m                                                                                           [39m [90m0.14s[39m  
+  [32;1m✓[39;22m[90m [39m[90mregister requires unique email[39m[90m                                                                              [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mregister requires password confirmation[39m[90m                                                                     [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90mlogin page is accessible[39m[90m                                                                                    [39m [90m0.12s[39m  
+  [32;1m✓[39;22m[90m [39m[90muser can login with correct credentials[39m[90m                                                                     [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90muser cannot login with wrong password[39m[90m                                                                       [39m [90m0.32s[39m  
+  [32;1m✓[39;22m[90m [39m[90mauthenticated user can logout[39m[90m                                                                               [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mguest is redirected from restaurant dashboard[39m[90m                                                               [39m [90m0.14s[39m  
+  [32;1m✓[39;22m[90m [39m[90mguest is redirected from admin dashboard[39m[90m                                                                    [39m [90m0.13s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\ExampleTest[39m
+  [32;1m✓[39;22m[90m [39m[90mhealth endpoint returns ok[39m[90m                                                                                  [39m [90m0.14s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\Restaurant\BillingTest[39m
+  [32;1m✓[39;22m[90m [39m[90mbilling page is accessible[39m[90m                                                                                  [39m [90m0.19s[39m  
+  [32;1m✓[39;22m[90m [39m[90mplans page is accessible[39m[90m                                                                                    [39m [90m0.18s[39m  
+  [32;1m✓[39;22m[90m [39m[90mowner can subscribe to free plan[39m[90m                                                                            [39m [90m0.16s[39m  
+  [32;1m✓[39;22m[90m [39m[90mowner can cancel subscription[39m[90m                                                                               [39m [90m0.18s[39m  
+  [32;1m✓[39;22m[90m [39m[90mcancel is blocked without active subscription[39m[90m                                                               [39m [90m0.15s[39m  
+  [32;1m✓[39;22m[90m [39m[90mpayment history page is accessible[39m[90m                                                                          [39m [90m0.42s[39m  
+  [32;1m✓[39;22m[90m [39m[90mguest cannot access billing[39m[90m                                                                                 [39m [90m0.13s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\Restaurant\DashboardTest[39m
+  [32;1m✓[39;22m[90m [39m[90mowner can access dashboard[39m[90m                                                                                  [39m [90m0.18s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdashboard shows correct stats[39m[90m                                                                               [39m [90m0.20s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdashboard shows subscription warning without active subscription[39m[90m                                            [39m [90m0.16s[39m  
+  [32;1m✓[39;22m[90m [39m[90munverified user cannot access dashboard[39m[90m                                                                     [39m [90m0.12s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\Restaurant\MenuItemTest[39m
+  [32;1m✓[39;22m[90m [39m[90mowner can view menu items index[39m[90m                                                                             [39m [90m0.16s[39m  
+  [32;1m✓[39;22m[90m [39m[90mowner can access create form[39m[90m                                                                                [39m [90m0.15s[39m  
+  [32;1m✓[39;22m[90m [39m[90mowner can create menu item[39m[90m                                                                                  [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90mcreate requires english name[39m[90m                                                                                [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90musage limit blocks create when plan limit reached[39m[90m                                                           [39m [90m0.15s[39m  
+  [32;1m✓[39;22m[90m [39m[90mowner can update menu item[39m[90m                                                                                  [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mowner cannot update another restaurants item[39m[90m                                                                [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90mowner can delete menu item[39m[90m                                                                                  [39m [90m0.11s[39m  
+  [32;1m✓[39;22m[90m [39m[90mowner can duplicate menu item[39m[90m                                                                               [39m [90m0.12s[39m  
+
+  [90mTests:[39m    [32;1m95 passed[39;22m[90m (168 assertions)[39m
+  [90mDuration:[39m [39m15.57s[39m
+
