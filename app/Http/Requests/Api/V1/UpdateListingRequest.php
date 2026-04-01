@@ -28,7 +28,6 @@ class UpdateListingRequest extends FormRequest
             'gabari'           => ['sometimes', 'nullable', 'numeric', 'min:0'],
             'description'      => ['sometimes', 'nullable', 'string'],
             'status'           => ['sometimes', 'string', 'in:passive'],
-            'expires_at'       => ['sometimes', 'nullable', 'date'],
             'documents.*'      => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:10240'],
             'photos.*'         => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'remove_documents.*' => ['integer'],

@@ -30,7 +30,6 @@ class UpdateListingRequest extends FormRequest
             'kaks'          => ['nullable', 'numeric', 'min:0'],
             'description'   => ['nullable', 'string'],
             'is_featured'   => ['boolean'],
-            'expires_at'    => ['nullable', 'date'],
             'documents.*'   => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:10240'],
             'photos.*'      => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'remove_documents' => ['nullable', 'array'],

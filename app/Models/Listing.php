@@ -79,7 +79,6 @@ class Listing extends Model implements HasMedia
         'is_featured',
         'featured_credit_spent',
         'view_count',
-        'expires_at',
         'parcel_geometry',
     ];
 
@@ -89,7 +88,6 @@ class Listing extends Model implements HasMedia
         'area_m2'          => 'decimal:2',
         'taks'             => 'decimal:2',
         'kaks'             => 'decimal:2',
-        'expires_at'       => 'datetime',
         'view_count'       => 'integer',
         'parcel_geometry'  => 'array',
     ];

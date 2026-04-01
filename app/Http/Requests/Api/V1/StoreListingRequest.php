@@ -27,7 +27,6 @@ class StoreListingRequest extends FormRequest
             'kaks'          => ['nullable', 'numeric', 'min:0'],
             'gabari'        => ['nullable', 'numeric', 'min:0'],
             'description'      => ['nullable', 'string'],
-            'expires_at'       => ['nullable', 'date'],
             'request_featured' => ['nullable', 'boolean'],
             'documents.*'   => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:10240'],
             'photos.*'      => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],

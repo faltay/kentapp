@@ -207,6 +207,9 @@
                         Parsel Geometrisi
                     </h3>
                     <div class="card-options">
+                        <button type="button" class="btn btn-sm btn-primary me-2" id="parcel-query-btn">
+                            <i class="ti ti-search icon me-1"></i>Parsel Sorgula
+                        </button>
                         <button type="button" class="btn btn-sm btn-ghost-danger" id="clear-geometry-btn" style="display:none">
                             <i class="ti ti-trash icon me-1"></i>Çizimi Sil
                         </button>
@@ -288,20 +291,6 @@
                 </div>
             </div>
 
-            {{-- Bitiş Tarihi --}}
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="ti ti-calendar icon me-1 text-primary"></i>
-                        {{ __('admin.listings.form.expires_at') }}
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <input type="datetime-local" name="expires_at" class="form-control"
-                           value="{{ $listing->expires_at?->format('Y-m-d\TH:i') }}">
-                    <div class="invalid-feedback" data-field="expires_at"></div>
-                </div>
-            </div>
 
         </div>
     </div>

@@ -98,8 +98,6 @@
                     <dt class="col-sm-4">{{ __('admin.listings.form.view_count') }}</dt>
                     <dd class="col-sm-8">{{ $listing->view_count }}</dd>
 
-                    <dt class="col-sm-4">{{ __('admin.listings.form.expires_at') }}</dt>
-                    <dd class="col-sm-8">{{ $listing->expires_at?->format('d.m.Y H:i') ?? '—' }}</dd>
                 </dl>
             </div>
         </div>

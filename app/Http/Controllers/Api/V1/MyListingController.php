@@ -161,7 +161,6 @@ class MyListingController extends ApiController
             'area_m2'     => $listing->area_m2,
             'is_featured' => $listing->is_featured,
             'view_count'  => $listing->view_count,
-            'expires_at'  => $listing->expires_at?->toISOString(),
             'created_at'  => $listing->created_at->toISOString(),
         ];
 

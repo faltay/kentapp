@@ -252,19 +252,6 @@
                 </div>
             </div>
 
-            {{-- Bitiş Tarihi --}}
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="ti ti-calendar icon me-1 text-primary"></i>
-                        {{ __('admin.listings.form.expires_at') }}
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <input type="datetime-local" name="expires_at" class="form-control">
-                    <div class="invalid-feedback" data-field="expires_at"></div>
-                </div>
-            </div>
 
         </div>
     </div>
