@@ -40,6 +40,8 @@ class PaymentService
                 throw new \RuntimeException('İyzico form oluşturulamadı: ' . $result->getErrorMessage());
             }
 
+            $payment->update(['provider_payment_id' => $result->getToken()]);
+
             return [
                 'payment_id'           => $payment->id,
                 'token'                => $result->getToken(),
@@ -68,7 +70,7 @@ class PaymentService
             ]);
 
             $payment = Payment::where('status', Payment::STATUS_PENDING)
-                ->where('description', 'conversation_id:' . $conversationId)
+                ->where('provider_payment_id', $token)
                 ->lockForUpdate()
                 ->firstOrFail();
 
