@@ -70,7 +70,7 @@
 
 {{-- Demo Credentials --}}
 <div class="mt-4">
-    <div class="row g-2">
+    <div class="row g-2 justify-content-center">
         <div class="col-6">
             <div class="card card-sm" style="cursor:pointer" onclick="fillLogin('admin@kentapp.test','password')">
                 <div class="card-body p-2 text-center">
@@ -81,48 +81,6 @@
                     </div>
                     <div class="fw-medium small">Super Admin</div>
                     <div class="text-secondary" style="font-size:.7rem">admin@kentapp.test</div>
-                    <div class="text-secondary" style="font-size:.7rem">password</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card card-sm" style="cursor:pointer" onclick="fillLogin('owner@kentapp.test','password')">
-                <div class="card-body p-2 text-center">
-                    <div class="mb-1">
-                        <span class="avatar avatar-sm bg-green-lt">
-                            <i class="ti ti-building-community icon"></i>
-                        </span>
-                    </div>
-                    <div class="fw-medium small">Müteahhit</div>
-                    <div class="text-secondary" style="font-size:.7rem">owner@kentapp.test</div>
-                    <div class="text-secondary" style="font-size:.7rem">password</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card card-sm" style="cursor:pointer" onclick="fillLogin('owner2@kentapp.test','password')">
-                <div class="card-body p-2 text-center">
-                    <div class="mb-1">
-                        <span class="avatar avatar-sm bg-yellow-lt">
-                            <i class="ti ti-home-2 icon"></i>
-                        </span>
-                    </div>
-                    <div class="fw-medium small">Arsa Sahibi</div>
-                    <div class="text-secondary" style="font-size:.7rem">owner2@kentapp.test</div>
-                    <div class="text-secondary" style="font-size:.7rem">password</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card card-sm" style="cursor:pointer" onclick="fillLogin('agent@kentapp.test','password')">
-                <div class="card-body p-2 text-center">
-                    <div class="mb-1">
-                        <span class="avatar avatar-sm bg-purple-lt">
-                            <i class="ti ti-user-star icon"></i>
-                        </span>
-                    </div>
-                    <div class="fw-medium small">Emlak Danışmanı</div>
-                    <div class="text-secondary" style="font-size:.7rem">agent@kentapp.test</div>
                     <div class="text-secondary" style="font-size:.7rem">password</div>
                 </div>
             </div>
