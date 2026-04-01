@@ -59,6 +59,14 @@ class PaymentService
 
             $conversationId = $form->getConversationId();
 
+            Log::info('Iyzico callback details', [
+                'token'           => $token,
+                'conversation_id' => $conversationId,
+                'status'          => $form->getStatus(),
+                'payment_status'  => $form->getPaymentStatus(),
+                'error_message'   => $form->getErrorMessage(),
+            ]);
+
             $payment = Payment::where('status', Payment::STATUS_PENDING)
                 ->where('description', 'conversation_id:' . $conversationId)
                 ->lockForUpdate()
